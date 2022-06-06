@@ -8,13 +8,13 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 
-# endpoint to register
+# endpoint to register, open to everyone
 class UserRegistration(generics.CreateAPIView):
     queryset = UserAccounts.objects.all()
     serializer_class = UserSerializer
 
 
-# endpoint to view user token. It uses django default login for authentication
+# endpoint to view user token. This view requires django default login for authentication instead of using token
 class GetToken(generics.RetrieveAPIView):
     queryset = Token.objects.all()
     serializer_class = TokenSerializer

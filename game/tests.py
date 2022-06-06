@@ -26,11 +26,11 @@ class GameTest(APITestCase):
         self.assertEqual(response.data["password"], "000000")
         self.assertEqual(response.data["moves"], json.dumps({}))
 
-    def test_without_token(self):
+    def test_create_game_without_token(self):
         response = self.client.post(self.create_game_url, follow='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_with_wrong_token(self):
+    def test_create_game_with_wrong_token(self):
         response = self.client.post(self.create_game_url, HTTP_AUTHORIZATION='Bearer ' + "adfasd", follow='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         response = self.client.post(self.create_game_url, HTTP_AUTHORIZATION='Token ' + self.token1.key, follow='json')
