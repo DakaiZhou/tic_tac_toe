@@ -74,6 +74,6 @@ class AccountsTest(APITestCase):
         }
         self.client.post(self.registration_url, input_data, follow='json')
         self.client.login(username="test_user2", password='testpassword')
-        response = self.client.get(self.get_token_url, follow='json')
+        response = self.client.post(self.get_token_url, follow='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(response.data["token"])

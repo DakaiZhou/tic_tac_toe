@@ -15,13 +15,13 @@ class UserRegistration(generics.CreateAPIView):
 
 
 # endpoint to view user token. This view requires django default login for authentication instead of using token
-class GetToken(generics.RetrieveAPIView):
+class GetToken(generics.CreateAPIView):
     queryset = Token.objects.all()
     serializer_class = TokenSerializer
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [SessionAuthentication, BasicAuthentication]
 
-    def retrieve(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         token_lst = Token.objects.filter(user=self.request.user)
         if len(token_lst) == 1:
             token = token_lst[0]
